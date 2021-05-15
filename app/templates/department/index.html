@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link href="{{ url_for('static', filename='assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ url_for('static', filename='assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ url_for('static', filename='assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ url_for('static', filename='assets/libs/datatables.net-select-bs4/css//select.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block js %}
+<script src="{{ url_for('static', filename='assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/libs/datatables.net-buttons/js/buttons.html5.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/libs/datatables.net-buttons/js/buttons.flash.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/libs/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/libs/datatables.net-keytable/js/dataTables.keyTable.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/libs/datatables.net-select/js/dataTables.select.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/libs/pdfmake/build/pdfmake.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/libs/pdfmake/build/vfs_fonts.js') }}"></script>
+<!-- third party js ends -->
+
+<!-- Datatables init -->
+<!--<script src="{{ url_for('static', filename='assets/js/pages/datatables.init.js') }}"></script>-->
+
+<!-- Departments-->
+<script src="{{ url_for('static', filename='js/department.js') }}"></script>
+{% endblock %}
+
+{% block title %}Afdelingen{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title">Afdelingen</h4>
+                <p class="sub-header">
+                    <a class="btn btn-primary" href="{{ url_for('department.create') }}">Nieuw</a>
+                </p>
+
+                <table id="basic-datatable" class="table dt-responsive nowrap w-100">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Naam</th>
+                            <th>Omschrijving</th>
+                            <th>Gemaakt op</th>
+                            <th>Akties</th>
+                        </tr>
+                    </thead>
+                
+                    <tbody>
+                    {% for department in departments %}
+                        <tr>
+                            <td>{{ department.id }}</td>
+                            <td>{{ department.name }}</td>
+                            <td>{{ department.description|truncate(25, True,'...',0) }}</td>
+                            <td>{{ moment(department.created).format('LLLL') }}</td>
+                            <td>
+                                <a class="btn btn-sm btn-info" href="{{ url_for('department.show', id=department.id) }}">Bekijken</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+            </div> <!-- end card body-->
+        </div> <!-- end card -->
+    </div><!-- end col-->
+</div>
+<!-- end row-->
+{% endblock %}

@@ -1,0 +1,94 @@
+#Maak directory
+mkdir cmms_project
+
+#pipenv
+python3 -m venv venv
+source venv/bin/activate
+venv\Scripts\activate
+
+conda create --name Tdapplication python=3.8.5
+conda activate Tdapplication
+conda deactivate
+
+#requirements.txt
+pip freeze > requirements.txt
+pip install -r requirements.txt
+
+#upgrade pip
+python -m pip install --upgrade pip
+
+#install
+pip install flask
+pip install flask-wtf
+pip install email_validator
+pip install flask-sqlalchemy
+pip install flask_bcrypt
+pip install flask_login
+pip install pillow
+pip install flask_migrate
+pip install python-dotenv
+pip install flask_moment
+pip install flask_mail
+
+#postgress
+pip install psycopg2-binary
+
+export FLASK_APP=hello.py
+set FLASK_APP=flaskblog.py
+set FLASK_DEBUG=true
+flask run
+
+#Flask migrate
+flask db init
+flask db migrate -m "init"
+flask db upgrade
+
+#Insert roles
+flask shell
+Role.insert_roles()
+Role.query.all()
+
+# attributes of the event object matching form field names will be used for field values
+form = EditEventForm(obj=event)
+
+# populates the attributes of the passed obj with data from the form’s fields
+form.populate_obj(event)
+
+
+{{ url_for('static', filename='') }}
+{{ url_for('main.index') }}
+
+� null is database-related. When a field has null=True it can store a database entry
+as NULL, meaning no value.
+� blank is validation-related, if blank=True then a form will allow an empty value,
+whereas if blank=False then a value is required
+
+but with a string you must use '' instead off null
+
+
+{% static '' %}
+
+#reindent
+shift-alt-f
+
+#Bitbucket
+git init
+git status
+# git add -A
+git add .
+git commit -am 'initialcommit'
+git remote add origin https://snelledre@bitbucket.org/snelledre/cmms.git  //pp414026
+git push -u origin master
+
+
+#Git
+git config --global user.name "snelledre"
+git config --global user.email "snelledre@hotmail.nl"
+git config --global push.default matching
+
+git init
+git add .
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/snelledre/cmms.git
+git push -u origin main
