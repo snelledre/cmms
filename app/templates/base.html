@@ -24,6 +24,9 @@
 		<!-- icons -->
 		<link href="{{ url_for('static', filename='assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
 
+        <!-- main css -->
+        <link href="{{ url_for('static', filename='/css/main.css') }}" rel="stylesheet" type="text/css" />
+
     </head>
 
     <body class="loading">
@@ -53,12 +56,13 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box page-title-box-alt">
-                                    <h4 class="page-title">Starter</h4>
+                                    <h4 class="page-title">{% block page_title %}{% endblock %}</h4>
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Minton</a></li>
-                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Extra Pages</a></li>
-                                            <li class="breadcrumb-item active">Starter</li>
+
+                                            <!-- Breadcrumbs -->
+                                            {% block breadcrumbs %}{% endblock %}
+
                                         </ol>
                                     </div>
                                 </div>

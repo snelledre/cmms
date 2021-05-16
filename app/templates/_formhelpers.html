@@ -1,0 +1,28 @@
+{% macro displayField(field, fieldName) %}
+    <div class="form-group">
+        {{ field(class_='form-control', placeholder=fieldName, **kwargs) }}
+        <!-- Error messages -->
+        <ul class="formError">
+            {% for error in field.errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endmacro %}
+
+{% macro render_field(field) %}
+    <dt>{{ field.label(class_="form-label") }}
+    <dd>{{ field(**kwargs)|safe }}
+        {% if field.errors %}
+            <div class="invalid-feedback" style="display: block;">
+                {% for error in field.errors %}
+                    {{ error }}
+                {% endfor %}
+            </div>
+        {% endif %}
+    </dd>
+{% endmacro %}
+
+{% macro render_submitbutton(field) %}
+    <dd>{{ field(**kwargs)|safe }}</dd>
+{% endmacro %}

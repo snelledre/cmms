@@ -1,13 +1,11 @@
-{# Render form fields #}
 
-{% macro displayField(field, fieldName) %}
-    <div class="form-group">
-        {{ field(class_='form-control', placeholder=fieldName, **kwargs) }}
-        <!-- Error messages -->
-        <ul class="formError">
-            {% for error in field.errors %}
-                <li>{{ error }}</li>
-            {% endfor %}
-        </ul>
-    </div>
+{% macro render_breadcrumb_item(endpoint, text) %}
+    {% set active = True if request.endpoint and request.endpoint == endpoint else False %}
+    <li class="breadcrumb-item {% if active %}active{% endif %}" {% if active %} aria-current="page"{% endif %}>
+        {% if active %}
+            {{ text }}
+        {% else %}
+        <a href="{{ url_for(endpoint, **kwargs) }}">{{ text }}</a>
+        {% endif %}
+    </li>
 {% endmacro %}

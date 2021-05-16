@@ -1,7 +1,16 @@
 {% extends "base.html" %}
-{% from 'bootstrap/form.html' import render_field %}
+{% from '_macros.html' import render_breadcrumb_item %}
 
-{% block title %}Nieuwe afdeling{% endblock %}
+{% block title %}Bekijk afdeling{% endblock %}
+{% block page_title %}Bekijk afdeling{% endblock %}
+
+{% block breadcrumbs %}
+
+{{ render_breadcrumb_item('main.index', 'Home') }}
+{{ render_breadcrumb_item('department.index', 'Afdelingen') }}
+{{ render_breadcrumb_item('department.show', 'Bekijk afdeling', render_kw={'id': 'id=department.id'}) }}
+
+{% endblock %}
 
 {% block content %}
 
@@ -28,14 +37,14 @@
 
                     <div class="mb-2">
                         <div class="form-group">
-                            <strong>Gemaakt op : </strong> {{ department.created }}
+                            <strong>Gemaakt op : </strong> {{ moment(department.created).format('LLLL') }}
                         </div>
                     </div>
 
                     {% if department.updated %}
                         <div class="mb-2">
                             <div class="form-group">
-                                <strong>Laatste wijziging : </strong> {{ department.updated }}
+                                <strong>Laatste wijziging : </strong> {{ moment(department.updated).format('LLLL') }}
                             </div>
                         </div>
                     {% else %}

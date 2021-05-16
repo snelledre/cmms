@@ -1,6 +1,13 @@
 {% extends "base.html" %}
+{% from '_macros.html' import render_breadcrumb_item %}
 
 {% block title %}Main{% endblock %}
+
+{% block breadcrumbs %}
+
+{{ render_breadcrumb_item('main.index', 'Home') }}
+
+{% endblock %}
 
 {% block content %}
 <div class="page-header">

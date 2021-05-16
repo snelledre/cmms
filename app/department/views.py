@@ -3,7 +3,7 @@ from flask_login import login_user, login_required, current_user
 from . import department
 from .. import db
 from ..models import Department, Permission
-from .forms import DepartmentForm, DepartmentShowForm, DepartmentEditForm
+from .forms import DepartmentForm, DepartmentEditForm
 from ..decorators import admin_required, permission_required
 
 
@@ -21,7 +21,7 @@ def index():
 def create():
     form = DepartmentForm()
     if form.validate_on_submit():
-        department = Department(name=form.name.data[0].upper() + form.name.data[1:],
+        department = Department(name=form.name.data[0].upper() + form.name.data[1:].lower(),
                                 description=form.description.data)
         db.session.add(department)
         db.session.commit()
@@ -45,7 +45,7 @@ def edit(id):
     department = Department.query.get_or_404(id)
     form = DepartmentEditForm(department.name)
     if form.validate_on_submit():
-        department.name = form.name.data
+        department.name = form.name.data[0].upper() + form.name.data[1:].lower()
         department.description = form.description.data
         db.session.commit()
         flash(u'Afdeling is bijgewerkt.', 'success')
